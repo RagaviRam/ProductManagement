@@ -14,15 +14,6 @@ class ProductController extends Controller
     function create(){
         return view('productManagement.layouts.app');
     }
-    function dashboardAdmin(){
-        return view('productManagement.admin');
-    }
-    function dashboardManager(){
-        return view('productManagement.manager');
-    }
-    function dashboardCustomer(){
-        return view('productManagement.customer');
-    }
     function dashboardProduct(){
         $product = Product::all();
         //$product = Product::orderby("productname", "asc");
@@ -78,6 +69,36 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
+        return redirect()->route('product/product_list');
+    }
+    function productEdit($id){
+        $product = Product::find($id);
+        return View::make('productManagement.newProduct.edit',['data' => $product]);
+    }
+    function productUpdate(Request $request, $id){
+        $request->validate([
+            'productname' => 'required|min:6|max:30',
+            'sku' => 'required',
+            'quantity' => 'required|numeric',
+            'image' => 'required|mimes:jpg,png,gif,svg,jpeg|max:2048',
+        ], [
+            'producttname.required' => 'Name is Required',
+            'productname.min' => 'Name should be atleast :min characters',
+            'prouctname.max' => 'Name should not be greater than :max characters',
+            'sku.required' => 'Name is Required',
+            'quantity.required' => 'Quantity is required',
+            'quantity.numeric' => 'Quantity should be in number',
+            'image.required' => 'Image is Required',
+            'image.mimes' => 'Image must be supported format',
+            'image.max' => 'Ur image should be :max characters',    
+        ]);
+        $product = product::find($id);
+        $product = new Product;
+        $product->productname = $request->productname;
+        $product->SKU = $request->sku;
+        $product->quantity = $request->quantity;
+        $product->productimage = $request->image;
+        $product->update();
         return redirect()->route('product/product_list');
     }
 }

@@ -8,32 +8,31 @@
                 <table border="1"  style="margin-left: 500px;" >
                     <thead>
                         <tr>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">SKU</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Update</th>
-                            <th scope="col">Destroy</th>
+                            <th scope="col">Role id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">E-mail Address</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
                             <th scope="col">Add</th>
+
                         </tr>
                     </thead>
                     @forelse ($users as $data)
                     <tbody>
                         <tr>
                             
-                            <td>{{$data->productname}}</td>
-                            <td>{{$data->SKU}}</td>
-                            <td>{{$data->quantity}}</td>
-                            <td><img src="{{asset('storage/image/'.$data->productimage)}}" style="max-width:60px;"></td>
-                            <td><a href="{{route('product/product_edit',['id'=>$data->id])}}"><input name="submit" type="submit" value="Edit"></a></td>
+                            <td>{{$data->roleid}}</td>
+                            <td>{{$data->name}}</td>
+                            <td>{{$data->email}}</td>
+                            <td><a href="{{route('admin/edit',['id'=>$data->id])}}"><input name="submit" type="submit" value="Edit"></a></td>
                             <td>
-                                <form action="{{route('product/product_delete',['id'=>$data->id])}}" method="post">
+                                <form action="" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <input name="submit" type="submit" value="Delete">
                                 </form>
                             </td>
-                            <td><a href="{{route('product/add_product')}}"><input name="submit" type="submit" value="Add"></a></td>
+                            <td><a href="{{route('product/admin')}}"><input name="submit" type="submit" value="Add"></a></td>
 
                         </tr>
                     </tbody>
