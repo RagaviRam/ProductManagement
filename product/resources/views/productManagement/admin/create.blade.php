@@ -1,11 +1,15 @@
 @extends('productManagement.layouts.app')
 
 @section('content')
+
 <section class="content">
     <div class="col-sm-8 text-center">
+    
     <form action="{{route('admin/register')}}" method="post" enctype="multipart/form-data">
     @csrf
-        <h1 style="margin-left: 100px;"><b></b></h1>
+        
+        
+                <h2 style="margin-left: 100px;"><b>Admin</b></h2>
         <h2 style="margin-left: 100px;"><b>Register Here</b></h2>
             <div style="margin-left: 100px;" class="row col-5">
             <div class="form-group">
@@ -33,13 +37,16 @@
                 @endif
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
                 </div>
+                
             </div>
+            
         
     </div>
 </section>
     </form>
+    
   </div>
 </div>
 

@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\View;
 class AdminController extends Controller
 {
     function create(){
-
-        return view('productManagement.admin.create');
+        $user = User::all()->where('roleid',1);
+        return View::make('productManagement.admin.list', ['users' => $user]);
+       
     }
     function store(Request $request){
         $request->validate([
@@ -37,9 +38,8 @@ class AdminController extends Controller
     }
     function Index()
     {
-        $user = User::all();
-        return View::make('productManagement.admin.list', ['users' => $user]);
-        
+       
+        return view('productManagement.admin.create');
     }
     function edit($id){
         $user = User::find($id);
@@ -57,10 +57,14 @@ class AdminController extends Controller
             'password.required' => 'password is Required',
         ]);
         $user = User::find($id);
-        $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->update();
+        return redirect()->route('admin/list');
+    }
+    function destroy($id){
+        $user = User::find($id);
+        $user->delete();
         return redirect()->route('admin/list');
     }
     

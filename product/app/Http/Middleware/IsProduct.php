@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -16,14 +17,14 @@ class IsProduct
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->roleid == config('product.role.admin')){
-            return $next($request);
+        if (Auth::check() && Auth::user()->roleid == 1) {
+            return redirect()->route('product/admin');
         }
-        elseif(auth()->user()->roleid == config('product.role.manager')){
-            return $next($request);
+        elseif (Auth::check() && Auth::user()->roleid == 2) {
+            return redirect()->route('product/manager');
         }
-        elseif(auth()->user()->roleid == config('product.role.customer')){
-            return $next($request);
+        elseif (Auth::check() && Auth::user()->roleid == 3) {
+            return redirect()->route('product/customer');
         }
         
     }

@@ -4,7 +4,7 @@
     <section  class="content">
     <div class="col-sm-8 text-center">
 
-    <form action="{{route('product/store_product')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('product/update',$data->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('put')
             <h2 align ="center">Product Create</h2>

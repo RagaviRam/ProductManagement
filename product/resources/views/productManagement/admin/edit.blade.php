@@ -3,8 +3,9 @@
 @section('content')
 <section class="content">
     <div class="col-sm-8 text-center">
-    <form action="{{route('admin/register')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('admin/update',$data->id)}}" method="post" enctype="multipart/form-data">
     @csrf
+    @method('put')
         <h1 style="margin-left: 100px;"><b></b></h1>
         <h2 style="margin-left: 100px;"><b>Edit Here</b></h2>
             <div style="margin-left: 100px;" class="row col-5">
@@ -33,7 +34,7 @@
                 @endif
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
                 </div>
             </div>
         

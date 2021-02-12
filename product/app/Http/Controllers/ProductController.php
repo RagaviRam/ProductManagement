@@ -75,7 +75,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         return View::make('productManagement.newProduct.edit',['data' => $product]);
     }
-    function productUpdate(Request $request, $id){
+    function productUpdate(Request $request,$id){
         $request->validate([
             'productname' => 'required|min:6|max:30',
             'sku' => 'required',
@@ -93,12 +93,18 @@ class ProductController extends Controller
             'image.max' => 'Ur image should be :max characters',    
         ]);
         $product = product::find($id);
-        $product = new Product;
+        $fileExtension = $request->image->extension();
+        $timeStamp=Carbon::now()->format('Y_m_d_H_i_s');
+        $fileName = $timeStamp.'.'.$fileExtension;
+        $request->image->storeAs('public/image', $fileName);
         $product->productname = $request->productname;
         $product->SKU = $request->sku;
         $product->quantity = $request->quantity;
-        $product->productimage = $request->image;
+        $product->productimage = $fileName;
         $product->update();
         return redirect()->route('product/product_list');
+    }
+    function cart(){
+        return view('productManagement.newProduct.cart');
     }
 }
