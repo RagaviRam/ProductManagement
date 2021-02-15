@@ -30,24 +30,24 @@ class LoginController extends Controller
     protected $redirectTo;
     public function redirectTo()
     {
-        switch(Auth::user()->roleid){
-            case 1:
-            $this->redirectTo = 'admin/list';
-            return $this->redirectTo;
-                break;
-            case 2:
-                    $this->redirectTo = 'manager/list';
+        switch (Auth::user()->roleid) {
+            case "admin":
+                $this->redirectTo = 'admin/list';
                 return $this->redirectTo;
                 break;
-            case 3:
+            case "manager":
+                $this->redirectTo = 'manager/list';
+                return $this->redirectTo;
+                break;
+            case "customer":
                 $this->redirectTo = 'customer/list';
                 return $this->redirectTo;
                 break;
             default:
                 $this->redirectTo = '/login';
                 return $this->redirectTo;
-            }
         }
+    }
 
     /**
      * Create a new controller instance.
@@ -58,6 +58,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    
 }

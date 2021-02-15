@@ -102,7 +102,15 @@ h4 {
   
 <div class="container-fluid text-center">    
  <div class="row content">
- @include('productManagement.layouts.sidenav')
+ <div class="col-sm-2 sidenav">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#">Users</a></li>
+                <li><a href="{{route('admin/error')}}">Admin</a></li>
+                <li><a href="{{route('manager/error')}}">Manager</a></li>
+                <li><a href="{{route('customer/list')}}">Customer</a></li>
+                <li><a href="{{route('product/product_dashboard')}}">Product</a></li>
+</ul>
+    </div>
    <section class="content" style="padding-top:50px;">
    <h2><b>Barbie Doll</b></h2>
    <div class="container products">

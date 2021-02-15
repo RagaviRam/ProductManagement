@@ -17,15 +17,17 @@ class IsProduct
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->roleid == 1) {
-            return redirect()->route('product/admin');
+        if (Auth::check() && Auth::user()->roleid == config('product.role.admin')) {
+            //return redirect()->route('admin/list');
+            return $next($request);
         }
-        elseif (Auth::check() && Auth::user()->roleid == 2) {
-            return redirect()->route('product/manager');
+        elseif (Auth::check() && Auth::user()->roleid ==  config('product.role.manager')) {
+            return $next($request);
         }
-        elseif (Auth::check() && Auth::user()->roleid == 3) {
-            return redirect()->route('product/customer');
+        elseif (Auth::check() && Auth::user()->roleid ==  config('product.role.customer')) {
+            return $next($request);
         }
-        
+        //return redirect('home')->with('error', "You have no proper authentication to access the area!");
+        //abort(403);
     }
 }
